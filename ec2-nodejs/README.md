@@ -135,5 +135,37 @@ sudo service nginx restart
 
 Now visit your server’s public DNS URL, using port 80 and you should see the HEY! response.
 
+# Keeping the Node.js process running
+
+It’s quite tedious using ctrl+z to pause a process, and then running it in the background. Also, doing it this way will not allow the Node.js process to restart when you restart your server after an update or crash.
+
+Before moving forward, stop your running node process
+
+```shell
+killall -9 node
+```
+To keep these processes running we are going to use a great NPM package called PM2. While in an SSH session, install PM2 globally.
+
+```shell
+npm i -g pm2
+```
+To start your server, simply use pm2 to execute index.js.
+
+```shell
+pm2 start server/index.js
+```
+To make sure that your PM2 restarts when your server restarts
+
+```shell
+pm2 startup
+```
+This will print out a line of code you need to run depending on the server you are using. Run the code it outputs.
+
+Finally, save the current running processes so they are run when PM2 restarts.
+
+```shell
+pm2 save
+```
+That’s it! You can log out/in to SSH, even restart your server and it will continue to run on port 80.
 
 
