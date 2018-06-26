@@ -75,7 +75,4 @@ Below you can see:
 1. Click `Connect`
 2. Locally `chmod 400 you_perm_key.pem`
 3. Locally `ssh -i "you_perm_key.pem" ubuntu@ec2-...compute.amazonaws.com`
-4. install and configure locale as
-```shell
-curl -sL https://raw.githubusercontent.com/prabhatpankaj/ubuntustarter/master/initial.sh | sh
-```
+4. install and configure locale as `curl -sL https://raw.githubusercontent.com/prabhatpankaj/ubuntustarter/master/initial.sh | sh`
