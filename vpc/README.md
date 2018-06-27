@@ -21,10 +21,12 @@ Step: 1 Create The VPC:
 
 1) Login to AWS Go to services search bar type VPC
 
-Click “YourVPC’s” option on left side
+* Click “YourVPC’s” option on left side
+
 ![vpc](/images/createvpc1.png)
 
-Click on Create VPC
+* Click on Create VPC
+
 ![vpc](/images/createvpc2.png)
 
 Specifies a set of IP addresses in the form of IPv4 Classless Inter-Domain Routing (CIDR)  block (for example, 10.0.0.0/16) and check IPv6 CIDR block.
@@ -36,6 +38,7 @@ Default Tenancy: This is for running instances on shared hardware and is free of
 Dedicated Tenancy: This is for running your instances on single-tenant hardware. A $2 fee applies for each hour in which any dedicated instance is running in a region.
 
 Specify the following VPC details and then click “Yes, Create”.
+
 ![vpc](/images/createvpc3.png)
 
 2) Subnets:
