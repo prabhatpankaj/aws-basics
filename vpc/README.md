@@ -1,6 +1,11 @@
 # Virtual Private Cloud (VPC)
 
-Many configured instances with different sets of IP addresses :smile:
+Joining the market among the three major cloud Services like Public, Private and Hybrid are Virtual Private Clouds (VPC).
+
+VPC is a private cloud located inside a public cloud that enables you to experience the benefits of a virtualized network while using public cloud resources.
+
+It is related to the public cloud, but they are not the same. Instead of sharing resources and space in a public infrastructure, you get a changeable allotment of resources to configure.
+![vpc](/images/vpc.jpg)
 
 Isolated part of AWS cloud, 
 
@@ -82,7 +87,7 @@ And internet gateway sends request to `google.com`
 
 Public subnet is a subnet with Internet Gateway which allows other internet users to ping public IP.
 
-[Public Subnet](/images/public-subnet.png)
+![Public Subnet](/images/public-subnet.png)
 
 VPC Dashboard -> Start VPC Wizard
 
@@ -109,7 +114,7 @@ Create VPC
 
 ## VPC with Public and Private Subnets
 
-[Public and Private Subnets](/images/private-and-public-subnets.png)
+![Public and Private Subnets](/images/private-and-public-subnets.png)
 
 Public network - with internet gateway 
 Private - with NAT gateway
