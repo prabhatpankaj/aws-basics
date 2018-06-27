@@ -7,180 +7,74 @@ VPC is a private cloud located inside a public cloud that enables you to experie
 It is related to the public cloud, but they are not the same. Instead of sharing resources and space in a public infrastructure, you get a changeable allotment of resources to configure.
 ![vpc](/images/vpc.jpg)
 
-Isolated part of AWS cloud, 
+Virtual Private Clouds and private clouds are the same. Whereas Private clouds are entirely dedicated to the organization including hardware, Virtual Private clouds do not have the same hardware dedication and just creates a more secure environment on public infrastructure.
 
-Allows:
-* IP-addresses range
-* Sub-networks
-* VPN
-* Routing tables
+Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you have defined.
 
-*Create EC2 -> .. -> Configure Instance Details -> Create new VPC*
+This virtual network closely resembles a traditional network that you’d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+ 
+VPC Setup
 
+You can set up the VPC in the following five fluid steps
 
-VPN Gateway -> Router: [ Subnets, isolated AWS resources ]
+Step: 1 Create The VPC:
 
-## Range of IPv4 addresses for the VPC
+1) Login to AWS Go to services search bar type VPC
 
-`192.168.0.0 - 192.168.0.254` === `192.168.0.0/24`
+Click “YourVPC’s” option on left side
+![vpc](/images/createvpc1.jpg)
 
-16 is a count of bytes here : `192.168`
+Click on Create VPC
+![vpc](/images/createvpc2.jpg)
 
-Example:
-* `192.168`.0.0/16 - vpc range
-* `192.168.0`.0/24 - subnet 1
-* `192.168.1`.0/24 - subnet 2
+Specifies a set of IP addresses in the form of IPv4 Classless Inter-Domain Routing (CIDR)  block (for example, 10.0.0.0/16) and check IPv6 CIDR block.
 
-VPC is in all availability zones.
+Tenancy:
 
-CIDR Classless Inter-Domain Routing
+Default Tenancy: This is for running instances on shared hardware and is free of charge.
 
-Destination | Target
-------------|-------
-10.0.0.0/16 | local
+Dedicated Tenancy: This is for running your instances on single-tenant hardware. A $2 fee applies for each hour in which any dedicated instance is running in a region.
 
-VPC:
-* 10.0.0.0/16
-* 10.0.0.0/8
-* 10.0.1.0/8
+Specify the following VPC details and then click “Yes, Create”.
 
-## Private IP-address
+2) Subnets:
 
-* TODO
+Click “Create Subnet” option on left side
 
-## Public IP-address
+You should create subnets across multiple availability zones, with each subnet residing within a single zone.
 
-* Public IP is lost when the instance is reloaded
+Creating subnets in and launching instances across multiple availability zones will ensure a high-availability environment.
 
-## Elastic IP-address
+For this example, we created subnets using zones us-east1b and us-east-1d. These subnets are called “private subnets” because the instances we launch are not accessible from the Internet.
 
-*Network & Security -> Elastic IPs -> Allocate new address*
+Always choose the same Amazon Availability Zones for all tiers.
 
-* Free
-* Associated with AWS
-* Only `5 elastic IP-s` in zone
-* Can be reassigned to another instance
-* Small price if more IP-s required
+For example, if you choose two zones for high availability and use us-east-1a and us-east1b, then maintain that same 1a and 1b zones for all tiers.
 
-*`192.168...` are usually used cause of no conflicts with Internet*
+3) Create Internet Gateway:
 
-## Router and route table
+Click Internet Gateway on the left side:
 
-* VPC with one public network in Availability Zone A
-* Size 256 addresses
-* Internet Gateway is configured in VPC
+By default, instances that are launched into a VPC can’t communicate with the Internet.
 
-Destination | Target
-------------|-------
-10.0.0.0/16 | local
-0.0.0.0/0   | igw-id
+Internet gateway is a virtual router that connects a VPC to the Internet.
 
-## Internet Gateway
+4) Create Route table:
 
-Translates IP-address.
-EVen if network is public, it doesn't mean that it is routed from internet.
+Click Route option on the left side.
 
-When the request is sent from VPC to global internet, it sends request to Internet Gateway. 
-And internet gateway sends request to `google.com`
+Route table contains a set of rules, called routes that determine where network traffic is directed.
 
-## VPC with Public Subnets
+Each subnet in your VPC must be associated with a routing table that will control that subnet’s routing.
 
-Public subnet is a subnet with Internet Gateway which allows other internet users to ping public IP.
+You can associate multiple subnets with a single route table; however, you can only associate a subnet with one route table.
 
-![Public Subnet](/images/public-subnet.png)
+Step-2: Create Security Groups:
 
-VPC Dashboard -> Start VPC Wizard
+This process is similar to creating an SG (Security Group) in classic EC2.
 
-## 1. Select a VPC Configuration
+A security group is a set of firewall rules that control the traffic for your instance. On this page, you can add rules to allow specific traffic to reach your instance. For example, if you want to set up a web server and allow Internet traffic to reach your instance, add rules that allow unrestricted access to the HTTP and HTTPS ports. You can create a new security group or select from an existing one below.
 
-* VPC with a Single Public Subnet
-* VPC with Public and Private Subnets
-* VPC with Public and Private Subnets and Hardware VPN Access
-* VPC with a Private Subnet Only and Hardware Access
-
-## 2. 
-
-Key | Value
---- | -----
-VPC name| alex1
-Availability ZOne | eu-west-1a
-Subnet-name | alex11
-Service | com.amazonaws.eu-wet-1.s3
-Enable DNS hostnames | Yes
-
-Create VPC
-
-## 3. Successfully Created
-
-## VPC with Public and Private Subnets
-
-![Public and Private Subnets](/images/private-and-public-subnets.png)
-
-Public network - with internet gateway 
-Private - with NAT gateway
-
-NAT gateway is located in Public network and link to NAT is stored in Private subnet.
-Access to Internet is done from Public network.
-
-## 1. Select a VPC Configuration
-
-VPC with Public and Private Subnets
-
-## 2.
-
-Key | Value
---- | -----
-VPC name | alex 2
-Availability Zone | eu-west-1a
-Public subnet name | alex-pub
-Private subnet name | alex-priv
-Elastic IP Allocation ID | eipalloc-f3..
-Enable DNS hostnames | Yes
+Step-3: Launch an EC2 instance as per 
 
 
-## Access to private subnets
-
-* How to access to private subnet? (it is allowed to ssh to public network, use ssh to private network)
-
-* What about keys? Use ssh-agent (ssh -a)
-
-## Create instance in VPC
-
-### 1. Create private instance 
-
-Key | Value
---- | -----
-Network| alex1
-Subnet| alex-priv
-SSH | TCP | 22 | Anywhere
-HTTP | TCP | 80 | Anywhere
-
-(It will not be accessed)
-
-### 2. Create public instance 
-
-Key | Value
---- | -----
-Network | alex1
-Subnet | alex-pub
-Auto-assign Public IP | Enable
-SSH | TCP | 22 | Anywhere
-HTTP | TCP | 80 | Anywhere
-
-### 3. View info
-
-Now they are located in different VPC subnets and in the same VPC network
-
-Private instance contains Private IP e.g. `10.0.1.32`
-
-### 4. Log in to public instance
-
-`ssh ec2-user@...`
-
-### 5. Log in to private instance (from public instance)
-
-Google about ssh-agent of how to use the same private key for all ssh requests
-
-`ssh -A ec2-user@34....` -> (from public machine) `ssh ec2-user@10.0.1.32`
-
-*AWS rule. If you have issues - wait ~5 minutes for applying any changes*
