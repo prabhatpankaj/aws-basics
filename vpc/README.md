@@ -22,10 +22,10 @@ Step: 1 Create The VPC:
 1) Login to AWS Go to services search bar type VPC
 
 Click “YourVPC’s” option on left side
-![vpc](/images/createvpc1.jpg)
+![vpc](/images/createvpc1.png)
 
 Click on Create VPC
-![vpc](/images/createvpc2.jpg)
+![vpc](/images/createvpc2.png)
 
 Specifies a set of IP addresses in the form of IPv4 Classless Inter-Domain Routing (CIDR)  block (for example, 10.0.0.0/16) and check IPv6 CIDR block.
 
@@ -36,7 +36,7 @@ Default Tenancy: This is for running instances on shared hardware and is free of
 Dedicated Tenancy: This is for running your instances on single-tenant hardware. A $2 fee applies for each hour in which any dedicated instance is running in a region.
 
 Specify the following VPC details and then click “Yes, Create”.
-![vpc](/images/createvpc3.jpg)
+![vpc](/images/createvpc3.png)
 
 2) Subnets:
 
@@ -50,7 +50,7 @@ For this example, we created subnets using zones us-east1b and us-east-1d. These
 
 Always choose the same Amazon Availability Zones for all tiers.
 
-![subnet](/images/subnet.jpg)
+![subnet](/images/subnet.png)
 
 For example, if you choose two zones for high availability and use us-east-1a and us-east1b, then maintain that same 1a and 1b zones for all tiers.
 
@@ -62,7 +62,7 @@ By default, instances that are launched into a VPC can’t communicate with the 
 
 Internet gateway is a virtual router that connects a VPC to the Internet.
 
-![gateway](/images/gateway.jpg)
+![gateway](/images/gateway.png)
 
 4) Create Route table:
 
@@ -74,7 +74,7 @@ Each subnet in your VPC must be associated with a routing table that will contro
 
 You can associate multiple subnets with a single route table; however, you can only associate a subnet with one route table.
 
-![route](/images/route.jpg)
+![route](/images/route.png)
 
 Step-2: Create Security Groups:
 
@@ -82,7 +82,7 @@ This process is similar to creating an SG (Security Group) in classic EC2.
 
 A security group is a set of firewall rules that control the traffic for your instance. On this page, you can add rules to allow specific traffic to reach your instance. For example, if you want to set up a web server and allow Internet traffic to reach your instance, add rules that allow unrestricted access to the HTTP and HTTPS ports. You can create a new security group or select from an existing one below.
 
-![security](/images/security.jpg)
+![security](/images/security.png)
 
 Step-3: Launch an EC2 instance as per [Elastic Compute Cloud (EC2)](ec2/README.md)
 
