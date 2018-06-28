@@ -32,3 +32,5 @@ Let's look at the steps to create a custom Virtual Private Cloud in an AWS accou
 * Verify that the public instance can access the internet and private instances can access the internet through the NAT gateway.
 * Once all steps are completed, our newly created custom VPC will have the following architecture. Private instances are referred to as database servers and public instances are referred to as web servers in the diagram. Note that the NAT gateway should have the Elastic IP address to send traffic to the internet gateway as the source IP address. This VPC has both the public and private subnet in one availability zone; however, in order to have a highly available and fault-tolerant architecture, you can have a similar configuration of resources in additional availability zones:
 
+![routetablesvpc](/images/routetablesvpc.jpg)
+
