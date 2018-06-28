@@ -36,3 +36,10 @@ Once all steps are completed, our newly created custom VPC will have the followi
 
 ![routetablesvpc](/images/routetablesvpc.png)
 
+
+
+# additional information
+
+* Range of IPv4 addresses for the VPC
+
+`10.0.0.0 - 10.0.0.254` === `10.0.0.0/24`
