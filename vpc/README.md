@@ -17,76 +17,18 @@ VPC Setup
 
 You can set up the VPC in the following five fluid steps
 
-Step: 1 Create The VPC:
+Let's look at the steps to create a custom Virtual Private Cloud in an AWS account. This VPC will be created using IPv4 Classless Inter-Domain Routing (CIDR) block. It will have one public subnet and one public-facing instance in this subnet. It will also have one private subnet and one instance in private subnet. For instance, for a private subnet to access the internet, we will use a NAT gateway in a public subnet. This VPC will have security groups and network ACL configured to allow egress and ingress internet traffic along with routes configured to support this scenario:
 
-1) Login to AWS Go to services search bar type VPC
-
-* Click “YourVPC’s” option on left side
-
-![vpc](/images/createvpc1.png)
-
-* Click on Create VPC
-
-![vpc](/images/createvpc2.png)
-
-Specifies a set of IP addresses in the form of IPv4 Classless Inter-Domain Routing (CIDR)  block (for example, 10.0.0.0/16) and check IPv6 CIDR block.
-
-Tenancy:
-
-Default Tenancy: This is for running instances on shared hardware and is free of charge.
-
-Dedicated Tenancy: This is for running your instances on single-tenant hardware. A $2 fee applies for each hour in which any dedicated instance is running in a region.
-
-Specify the following VPC details and then click “Yes, Create”.
-
-![vpc](/images/createvpc3.png)
-
-2) Subnets:
-
-Click “Create Subnet” option on left side
-
-You should create subnets across multiple availability zones, with each subnet residing within a single zone.
-
-Creating subnets in and launching instances across multiple availability zones will ensure a high-availability environment.
-
-For this example, we created subnets using zones us-east1b and us-east-1d. These subnets are called “private subnets” because the instances we launch are not accessible from the Internet.
-
-Always choose the same Amazon Availability Zones for all tiers.
-
-![subnet](/images/subnet.png)
-
-For example, if you choose two zones for high availability and use us-east-1a and us-east1b, then maintain that same 1a and 1b zones for all tiers.
-
-3) Create Internet Gateway:
-
-Click Internet Gateway on the left side:
-
-By default, instances that are launched into a VPC can’t communicate with the Internet.
-
-Internet gateway is a virtual router that connects a VPC to the Internet.
-
-![gateway](/images/gateway.png)
-
-4) Create Route table:
-
-Click Route option on the left side.
-
-Route table contains a set of rules, called routes that determine where network traffic is directed.
-
-Each subnet in your VPC must be associated with a routing table that will control that subnet’s routing.
-
-You can associate multiple subnets with a single route table; however, you can only associate a subnet with one route table.
-
-![route](/images/route.png)
-
-Step-2: Create Security Groups:
-
-This process is similar to creating an SG (Security Group) in classic EC2.
-
-A security group is a set of firewall rules that control the traffic for your instance. On this page, you can add rules to allow specific traffic to reach your instance. For example, if you want to set up a web server and allow Internet traffic to reach your instance, add rules that allow unrestricted access to the HTTP and HTTPS ports. You can create a new security group or select from an existing one below.
-
-![security](/images/security.png)
-
-Step-3: Launch an EC2 instance as per [Elastic Compute Cloud (EC2)](ec2/README.md)
-
+* Create a VPC with a /16 IPv4 CIDR block such as 10.0.0.0/16.
+* Create an internet gateway and attach it to this VPC.
+* Create one subnet with /24 IPv4 CIDR block, such as 10.0.0.0/24, and call it a public subnet. Note that this CIDR block is a * subset of a VPC CIDR block.
+* Create another subnet with /24 IPv4 CIDR block, such as 10.0.1.0/24 and call it a private subnet. Note that this CIDR block is a subset of a VPC CIDR block and it does not overlap the CIDR block of a public subnet.
+* Create a custom route table and create a route for all traffic going to the internet to go through the internet gateway. Associate this route table with the public subnet.
+* Create a NAT gateway and associate it with the public subnet. Allocate one Elastic IP address and associate it with the NAT gateway.
+* Create a custom route in the main route table for all traffic going to the internet to go through NAT gateway. Associate this route table with the private subnet. This step will facilitate the routing of all internet traffic for instances in the private subnet to go through the NAT gateway. This will ensure IP addresses for private instances are not exposed to the internet.
+* Create a network ACL for each of these subnets. Configure rules that will define inbound and outbound traffic access for these subnets. Associate these NACLs with their respective subnets.
+* Create security groups for instances to be placed in public and private subnets. Configure rules for these security groups as per the access required. Assign these security groups with instances.
+* Create one instance each in the public and private subnet for this VPC. Assign a security group to each of them. An instance in a public subnet should have either a public IP or an EIP address.
+* Verify that the public instance can access the internet and private instances can access the internet through the NAT gateway.
+* Once all steps are completed, our newly created custom VPC will have the following architecture. Private instances are referred to as database servers and public instances are referred to as web servers in the diagram. Note that the NAT gateway should have the Elastic IP address to send traffic to the internet gateway as the source IP address. This VPC has both the public and private subnet in one availability zone; however, in order to have a highly available and fault-tolerant architecture, you can have a similar configuration of resources in additional availability zones:
 
