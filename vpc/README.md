@@ -43,3 +43,11 @@ Once all steps are completed, our newly created custom VPC will have the followi
 * Range of IPv4 addresses for the VPC
 
 `10.0.0.0 - 10.0.0.254` === `10.0.0.0/24`
+
+`/32 is a network mask of 255.255.255.255`
+
+`/24 is a network mask of 255.255.255.0`
+
+`10.0.0.254/32 = ip address of 10.0.0.0.254`
+ 
+![cidr](/images/cidrranges.png)
