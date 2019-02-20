@@ -12,3 +12,4 @@ Amazon Web Services common overview
 
 - [understanding-aws-tenancy](https://theithollow.com/2017/10/16/understanding-aws-tenancy)
 - [Connecting to Your Linux Instance from Windows Using PuTTY](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
+- [aws free](https://aws.amazon.com/free/)
