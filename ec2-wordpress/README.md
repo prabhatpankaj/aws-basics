@@ -25,6 +25,16 @@ update this
 - sudo a2enmod rewrite
 - sudo service apache2 restart
 
+* configure mysql
+
+```
+sudo mysql
+CREATE USER 'phpmyadminuser'@'localhost' IDENTIFIED BY 'pass1234';
+GRANT ALL PRIVILEGES ON *.* TO 'phpmyadminuser'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+\q
+
+```
 cd /var/www/
 
 - curl -O https://wordpress.org/latest.tar.gz
