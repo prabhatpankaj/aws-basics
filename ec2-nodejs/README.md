@@ -70,7 +70,9 @@ sudo rm -rf /etc/nginx/sites-available/default
 sudo nano /etc/nginx/sites-available/default
 
 * update default file
-```
+
+```shell
+
 server {
        listen 80;
        listen [::]:80;
@@ -86,6 +88,7 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
+
 ```
 * install restart nginx and reload it 
 
