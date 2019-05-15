@@ -57,10 +57,44 @@ go to the Security Groups tab in the EC2 console. Right click the security group
 
 Now we can use node to start the server!
 
+Using a browser, visit your public DNS URL with port 3000 and you should see the HEY! response.
+
+
 ```shell
 node index.js
 ```
-Using a browser, visit your public DNS URL with port 3000 and you should see the HEY! response.
+
+
+```
+sudo rm -rf /etc/nginx/sites-available/default
+sudo nano /etc/nginx/sites-available/default
+
+* update default file
+```
+server {
+       listen 80;
+       listen [::]:80;
+
+       server_name 54.157.197.164;
+
+       location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+* install restart nginx and reload it 
+
+```
+sudo apt install nginx
+sudo systemctl restart nginx
+sudo systemctl reload nginx
+```
+Using a browser, visit your public DNS URL and you should see the HEY! response.
 
 To leave the server running when we log out, we need to press ctrl+z to pause the process (this only works when your server is running, node index.js). When you press ctrl+z you will be presented with all jobs, in this case the only one there will be the Node.js job that was paused.
 
