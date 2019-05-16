@@ -37,6 +37,7 @@ This will create a package.json file which will be used to track any dependencie
 All we will need to run our server is the express package. To install express and add it to package.json.
 
 ```shell
+
 npm install express --save-dev
 ```
 Now we just need to add some code to run the server. We will use nano to write the server in an index.js file.
@@ -50,6 +51,7 @@ app.get('/', (req, res) => {
 })
 app.listen(3000, () => console.log('Server running on port 3000'))
 EOF
+
 ```
 The server I used just responds with “HEY!” when you do a request to /. I listen to requests on port 3000.
 
@@ -61,13 +63,25 @@ Using a browser, visit your public DNS URL with port 3000 and you should see the
 
 
 ```shell
+
 node index.js
+
 ```
 
+* install restart nginx and reload it 
+
+```
+sudo apt install nginx
+sudo systemctl restart nginx
+sudo systemctl reload nginx
+```
+
+* update configuration file .
 
 ```
 sudo rm -rf /etc/nginx/sites-available/default
 sudo nano /etc/nginx/sites-available/default
+```
 
 * update default file
 
@@ -90,13 +104,7 @@ server {
 }
 
 ```
-* install restart nginx and reload it 
 
-```
-sudo apt install nginx
-sudo systemctl restart nginx
-sudo systemctl reload nginx
-```
 Using a browser, visit your public DNS URL and you should see the HEY! response.
 
 To leave the server running when we log out, we need to press ctrl+z to pause the process (this only works when your server is running, node index.js). When you press ctrl+z you will be presented with all jobs, in this case the only one there will be the Node.js job that was paused.
