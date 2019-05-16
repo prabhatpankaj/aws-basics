@@ -104,7 +104,13 @@ server {
 }
 
 ```
+* restart nginx and reload it 
 
+```
+sudo systemctl restart nginx
+sudo systemctl reload nginx
+sudo systemctl status nginx
+```
 Using a browser, visit your public DNS URL and you should see the HEY! response.
 
 To leave the server running when we log out, we need to press ctrl+z to pause the process (this only works when your server is running, node index.js). When you press ctrl+z you will be presented with all jobs, in this case the only one there will be the Node.js job that was paused.
