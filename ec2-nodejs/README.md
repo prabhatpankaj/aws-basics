@@ -4,7 +4,7 @@ Once in an SSH session the first thing to do is get Node.js. NVM (Node Version M
 To install NVM just run this command (same as in the NVM installation instructions).
 
 ```shell
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
 source ~/.bashrc
 ```
@@ -12,12 +12,42 @@ install node
 
 ```shell
 nvm install 7
+nvm install 8
+nvm install 9
 ```
+
 To check node is ready to go just echo the version.
 
 ```shell
 node --version
 ```
+
+You can list available versions using ls-remote:
+
+```shell
+nvm ls-remote
+```
+
+And then in any new shell just use the installed version:
+
+```shell
+
+nvm use node 8
+```
+
+Or you can just run it:
+
+```shell
+nvm run node --version
+
+```
+
+To check node is ready to go just echo the version.
+
+```shell
+node --version
+```
+
 # Creating a public HTTP endpoint
 we are going to make a public URL anyone can request from the browser to get a response from the server.
 
