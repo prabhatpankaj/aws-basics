@@ -195,6 +195,7 @@ To setup the Startup Script, copy/paste the following command:
 ```
 sudo env PATH=$PATH:/home/ubuntu/.nvm/versions/node/v8.16.1/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
 ```
+change the node version if otherthen v8.16.1
 
 Finally, save the current running processes so they are run when PM2 restarts.
 
