@@ -209,14 +209,6 @@ List running pm2
 
 restart running pm2 by name
 
- pm2 ls
-┌────────┬────┬──────┬────────┬───┬─────┬───────────┐
-│ Name   │ id │ mode │ status │ ↺ │ cpu │ memory    │
-├────────┼────┼──────┼────────┼───┼─────┼───────────┤
-│ nodejs │ 0  │ fork │ online │ 0 │ 0%  │ 41.3 MB   │
-└────────┴────┴──────┴────────┴───┴─────┴───────────┘
- 
- restart pm2 nodejs
 ```
 pm2 restart nodejs
 ```
