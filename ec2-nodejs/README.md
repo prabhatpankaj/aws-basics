@@ -175,8 +175,14 @@ npm i -g pm2
 To start your server, simply use pm2 to execute index.js.
 
 ```shell
-pm2 start server/index.js
+pm2 start server/index.js --name "nodejs"
 ```
+┌────────┬────┬──────┬────────┬───┬─────┬───────────┐
+│ Name   │ id │ mode │ status │ ↺ │ cpu │ memory    │
+├────────┼────┼──────┼────────┼───┼─────┼───────────┤
+│ nodejs │ 0  │ fork │ online │ 0 │ 0%  │ 22.4 MB   │
+└────────┴────┴──────┴────────┴───┴─────┴───────────┘
+
 To make sure that your PM2 restarts when your server restarts
 
 ```shell
@@ -191,4 +197,31 @@ pm2 save
 ```
 That’s it! You can log out/in to SSH, even restart your server and it will continue to run on port 80.
 
+List running pm2
+```
+ pm2 ls
+```
+┌────────┬────┬──────┬────────┬───┬─────┬───────────┐
+│ Name   │ id │ mode │ status │ ↺ │ cpu │ memory    │
+├────────┼────┼──────┼────────┼───┼─────┼───────────┤
+│ nodejs │ 0  │ fork │ online │ 0 │ 0%  │ 41.3 MB   │
+└────────┴────┴──────┴────────┴───┴─────┴───────────┘
 
+restart running pm2 by name
+
+ pm2 ls
+┌────────┬────┬──────┬────────┬───┬─────┬───────────┐
+│ Name   │ id │ mode │ status │ ↺ │ cpu │ memory    │
+├────────┼────┼──────┼────────┼───┼─────┼───────────┤
+│ nodejs │ 0  │ fork │ online │ 0 │ 0%  │ 41.3 MB   │
+└────────┴────┴──────┴────────┴───┴─────┴───────────┘
+ 
+ restart pm2 nodejs
+```
+pm2 restart nodejs
+```
+┌────────┬────┬──────┬────────┬───┬─────┬───────────┐
+│ Name   │ id │ mode │ status │ ↺ │ cpu │ memory    │
+├────────┼────┼──────┼────────┼───┼─────┼───────────┤
+│ nodejs │ 0  │ fork │ online │ 1 │ 0%  │ 15.2 MB   │
+└────────┴────┴──────┴────────┴───┴─────┴───────────┘
