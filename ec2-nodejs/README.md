@@ -183,12 +183,18 @@ pm2 start server/index.js --name "nodejs"
 │ nodejs │ 0  │ fork │ online │ 0 │ 0%  │ 22.4 MB   │
 └────────┴────┴──────┴────────┴───┴─────┴───────────┘
 
-To make sure that your PM2 restarts when your server restarts
+Running PM2 as a service
 
-```shell
-pm2 startup
+After running the code above, it is recommended that you setup PM2 as a service so that it can start when the server starts.
+
 ```
-This will print out a line of code you need to run depending on the server you are using. Run the code it outputs.
+env PATH=$PATH:/usr/local/bin pm2 startup -u ubuntu
+```
+To setup the Startup Script, copy/paste the following command:
+
+```
+sudo env PATH=$PATH:/home/ubuntu/.nvm/versions/node/v8.16.1/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
+```
 
 Finally, save the current running processes so they are run when PM2 restarts.
 
