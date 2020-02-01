@@ -4,7 +4,7 @@ Once in an SSH session the first thing to do is get Node.js. NVM (Node Version M
 To install NVM just run this command (same as in the NVM installation instructions).
 
 ```shell
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 
 source ~/.bashrc
 ```
