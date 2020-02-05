@@ -189,7 +189,7 @@ Running PM2 as a service
 After running the code above, it is recommended that you setup PM2 as a service so that it can start when the server starts.
 
 ```
-env PATH=$PATH:/usr/local/bin pm2 startup -u ubuntu
+sudo env PATH=$PATH:/usr/local/bin pm2 startup -u ubuntu
 ```
 To setup the Startup Script, copy/paste the following command:
 
